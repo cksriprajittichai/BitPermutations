@@ -2,17 +2,19 @@ document.querySelector('.permutations_submit_btn').addEventListener('click', () 
 	let n = document.getElementById('permutations_input').value;
 	let permutations = getPermutations(n);
 
-	let display_list = document.getElementById('permutations_result');
+	let table = document.getElementById('permutations_result');
 
-	// Clear current list
-	while (display_list.childElementCount > 0) {
-		display_list.removeChild(display_list.childNodes[0])
+	// Clear current list. Top row is header
+	while (table.rows.length > 1) {
+		table.deleteRow(1)
 	}
 
     for (let i = 0; i < permutations.length; i++) {
-        let item = document.createElement('li');
-        item.appendChild(document.createTextNode(permutations[i]));
-        display_list.appendChild(item);
+		let row = table.insertRow(table.length);
+		let decimalCell = row.insertCell(0);
+		decimalCell.innerHTML = i;
+		let binaryCell = row.insertCell(1);
+		binaryCell.innerHTML = permutations[i];
     }
 });
 
